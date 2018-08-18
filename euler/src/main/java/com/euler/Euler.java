@@ -2,6 +2,8 @@ package com.euler;
 
 import java.util.Scanner;
 
+// import euler.P001;
+
 /**
  * Hello world!
  *
@@ -9,50 +11,60 @@ import java.util.Scanner;
 public class Euler {
 
   // create a single shared scanner for keyboard input
-  private static Scanner scanner = new Scanner( System.in );
+  private Scanner scanner = new Scanner( System.in );
 
   public static void main( String[] args ){
-    System.out.println( "Welcome to Project Euler!" );
-    System.out.println( "Please select your desired application: " );
-    System.out.println( "1: Multiples of 3 and 5");
 
-    // String input = scanner.nextLine();
-    // int num = Integer.parseInt( input );
-
-    int choice = scanner.nextInt();
-
-    switch (choice) {
-      case 1:
-
-        System.out.println( "This function will find the sum of all the natural "
-            + "numbers below a given limit. What is the limit? ");
-        try {
-          int limit = scanner.nextInt();
-          // int lim = Integer.parseInt( limit );
-          int ans = multiples3and5( limit );
-          System.out.println( ans );
-        } catch ( Exception e ) {
-        }
-
-        break;
-      case 2:
-        //
-        break;
-      default:
-        //
+    Euler euler = new Euler();
+    while (true) {
+      euler.display();
     }
-
 
   }
 
-  private static int multiples3and5( int limit ) {
-    int total = 0;
-    for ( int i = 0; i < limit; i++ ) {
-      if ( i % 3 == 0 || i % 5 == 0 ) {
-        total += i;
+  private void display() {
+    System.out.println( "Welcome to Project Euler! \n" 
+        + "Please select your desired application:  \n"
+        + "1: Multiples of 3 and 5\n"
+        + "4: Exit\n");
+
+    try {
+      int choice = scanner.nextInt();
+      scanner.nextLine();
+      switch (choice) {
+        case 1:
+          try {
+            P001 p001 = new P001();
+            p001.display();
+            int limit = scanner.nextInt();
+            int ans = p001.multiples3and5(limit);
+            System.out.println(ans + "\n");
+          } catch (Exception e) {
+            System.out.println(e);
+          }
+
+          break;
+        case 2:
+          //
+          break;
+        case 4:
+          this.exit();
+          break;
+        default:
+          System.out.println( "Invalid selection." );
+          //
       }
+    } catch (Exception e) {
+      scanner.nextLine();
+      System.out.println("Invalid input detected.\n");
     }
-    return total;
+
+  }
+
+
+  private void exit() {
+    System.out.println( "Exiting..." );
+    System.exit(1);
   }
 
 }
